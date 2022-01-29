@@ -39,45 +39,48 @@ public class Product {
   private Integer kcal;
 
   @Column(name = "prot_g")
-  private Integer protein;
+  private Integer proteinTotal;
 
   @Column(name = "protpl_g")
-  private Integer protplG;
+  private Integer proteinPlantBased;
 
   @Column(name = "protan_g")
-  private Integer protanG;
+  private Integer proteinAnimalBased;
 
   @Column(name = "cho_g")
-  private Integer choG;
+  private Integer carbsTotal;
 
   @Column(name = "sugar_g")
-  private Integer sugarG;
+  private Integer carbsSugar;
 
   @Column(name = "starch_g")
-  private Integer starchG;
+  private Integer carbsStarch;
 
   @Column(name = "FIBT_g")
-  private Integer fibG;
+  private Integer fiber;
 
   @Column(name = "fat_g")
-  private Integer fatG;
+  private Integer fatTotal;
 
   @Column(name = "facid_g")
-  private Integer facidG;
+  private Integer fattyAcidsTotal;
+
+  @Column(name = "fasat_g")
+  private Integer fatSaturated;
 
   @Column(name = "famscis_g")
-  private Integer famscisG;
+  private Integer fatUnsaturatedMono;
 
   @Column(name = "fapu_g")
-  private Integer fapuG;
+  private Integer fatUnsaturatedPoly;
 
   @Column(name = "FAPUN3_g")
-  private Integer fapun3G;
+  private Integer fatOmega3;
 
   @Column(name = "FAPUN6_g")
-  private Integer fapun6G;
+  private Integer fatOmega6;
 
   @Column(name = "FATRS_g")
-  private Integer fatrsG;
+  private Integer transfets;
 
 }
