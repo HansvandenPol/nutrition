@@ -13,15 +13,20 @@
     <form id="searchProduct">
       <input id="productValue" type="text" name="in" min="2" placeholder="enter a product.." />
       <button id="searchProductBtn" type="button">Search</button>
-    </form>  <script src="../js/jquery-3.6.0.js"></script>
+    </form>
   </div>
 
   <div class="details">
     <h3 id="productTitle"></h3>
-
+    <form id="quantityForm">
+      <label for="foodQuantity">Amount (g)</label>
+      <input id="foodQuantity" type="number" value="100" min="1" max="100000">
+    </form>
+    <br>
   </div>
 </div>
 
+  <script src="../js/jquery-3.6.0.js"></script>
   <script src="../js/index.js"></script>
 </body>
 </html>

@@ -1,12 +1,7 @@
 .details{
-  /*display: none;*/
-  /*width: 50%;*/
-  /*display: inline-table;*/
+  display: none;
 }
-.content{
-  /*width: 50%;*/
-  /*display: inline-table;*/
-}
+
 .container {
   display: flex;
 }

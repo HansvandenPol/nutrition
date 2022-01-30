@@ -33,54 +33,54 @@ public class Product {
   private String measureUnit;
 
   @Column(name = "hoeveelheid")
-  private Integer quantity;
+  private Double quantity;
 
   @Column(name = "enercc_kcal")
-  private Integer kcal;
+  private Double kcal;
 
   @Column(name = "prot_g")
-  private Integer proteinTotal;
+  private Double proteinTotal;
 
   @Column(name = "protpl_g")
-  private Integer proteinPlantBased;
+  private Double proteinPlantBased;
 
   @Column(name = "protan_g")
-  private Integer proteinAnimalBased;
+  private Double proteinAnimalBased;
 
   @Column(name = "cho_g")
-  private Integer carbsTotal;
+  private Double carbsTotal;
 
   @Column(name = "sugar_g")
-  private Integer carbsSugar;
+  private Double carbsSugar;
 
   @Column(name = "starch_g")
-  private Integer carbsStarch;
+  private Double carbsStarch;
 
   @Column(name = "FIBT_g")
-  private Integer fiber;
+  private Double fiber;
 
   @Column(name = "fat_g")
-  private Integer fatTotal;
+  private Double fatTotal;
 
   @Column(name = "facid_g")
-  private Integer fattyAcidsTotal;
+  private Double fattyAcidsTotal;
 
   @Column(name = "fasat_g")
-  private Integer fatSaturated;
+  private Double fatSaturated;
 
   @Column(name = "famscis_g")
-  private Integer fatUnsaturatedMono;
+  private Double fatUnsaturatedMono;
 
   @Column(name = "fapu_g")
-  private Integer fatUnsaturatedPoly;
+  private Double fatUnsaturatedPoly;
 
   @Column(name = "FAPUN3_g")
-  private Integer fatOmega3;
+  private Double fatOmega3;
 
   @Column(name = "FAPUN6_g")
-  private Integer fatOmega6;
+  private Double fatOmega6;
 
   @Column(name = "FATRS_g")
-  private Integer transfets;
+  private Double transfets;
 
 }
