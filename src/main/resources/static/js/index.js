@@ -1,19 +1,10 @@
-// $(document).ready(function () {
-//   $.ajax('http://localhost:8080/api/meal/test', {
-//     dataType: 'text',
-//     success: function (data, status, xhr) {
-//       console.log(data);
-//     },
-//     error: function (jqXhr, textStatus, errorMessage) {
-//       console.log(textStatus);
-//     }
-//   })
-// });
+var oldFoodQuantity = $("#foodQuantity").val();
 
 $("#productValue").on("keypress", function (e){
  if(e.which == 13){
    e.preventDefault();
    showProducts();
+   $("#productValue").blur();
  }
 });
 
@@ -86,29 +77,55 @@ function showProducts() {
   });
 }
 
-function fillDetails(data) {
-  console.log(data);
-  $(".details table").append("<tr><td><b>Quantity</b></td><td>" + data.quantity + " " + data.measureUnit + "</td></tr>");
-  $(".details table").append("<tr><td><b>Kcal</b></td><td>" + data.kcal + "</td></tr>");
-  $(".details table").append("<tr> </tr>");
-  $(".details table").append("<tr><td><b>Protein</b></td></tr>");
-  $(".details table").append("<tr><td>Protein(total)</td><td>" + data.proteinTotal + " g</td></tr>");
-  $(".details table").append("<tr><td>Protein plant based</td><td>" + data.proteinPlantBased + " g</td></tr>");
-  $(".details table").append("<tr><td>Protien animal based</td><td>" + data.proteinAnimalBased + " g</td></tr>");
-  $(".details table").append("<tr> </tr>");
-  $(".details table").append("<tr><td><b>Carbs</b></td></tr>");
-  $(".details table").append("<tr><td>Carbs(total)</td><td>" + data.carbsTotal + " g</td></tr>");
-  $(".details table").append("<tr><td>Carbs sugar</td><td>" + data.carbsSugar + " g</td></tr>");
-  $(".details table").append("<tr><td>Carbs starchy</td><td>" + data.carbsStarch + " g</td></tr>");
-  $(".details table").append("<tr><td>Fiber</td><td>" + data.fiber + " g</td></tr>");
-  $(".details table").append("<tr> </tr>");
-  $(".details table").append("<tr><td><b>Fat</b></td></tr>");
-  $(".details table").append("<tr><td>Fat(total)</td><td>" + data.fatTotal + " g</td></tr>");
-  $(".details table").append("<tr><td>Fat saturated</td><td>" + data.fatSaturated + " g</td></tr>");
-  $(".details table").append("<tr><td>Fat unsaturated mono</td><td>" + data.fatUnsaturatedMono + " g</td></tr>");
-  $(".details table").append("<tr><td>Fat unsaturated poly</td><td>" + data.fatUnsaturatedPoly + " g</td></tr>");
-  $(".details table").append("<tr><td>Fat unsaturated omega 3</td><td>" + data.fatOmega3 + " g</td></tr>");
-  $(".details table").append("<tr><td>Fat unsaturated omega 6</td><td>" + data.fatOmega6 + " g</td></tr>");
-  $(".details table").append("<tr><td>Transfats</td><td>" + data.transfets + " g</td></tr>");
+$("#foodQuantity").change(function () {
+  var currentFoodQuantity = $("#foodQuantity").val();
+  updateDetails(currentFoodQuantity);
+});
+
+$("#foodQuantity").on("keypress", function (e) {
+  if(e.which == 13){
+    e.preventDefault();
+    var currentFoodQuantity = $("#foodQuantity").val();
+    updateDetails(currentFoodQuantity);
+    $("#foodQuantity").blur();
+  }
+});
+
+function updateDetails(quantity) {
+  $(".nutritionValue").each(function (i, object) {
+    console.log(object);
+    var currentValue = $(object).text().split(" ")[0].trim();
+    console.log(currentValue);
+    $(object).text(((currentValue/oldFoodQuantity) * quantity).toFixed(1));
+
+  });
+
+  oldFoodQuantity = quantity;
+  // $(".nutritionValue").text()
 }
 
+function fillDetails(data) {
+  console.log(data);
+  $(".details table").append("<tr><td><b>Quantity</b></td><td class='nutritionValue'>" + data.quantity + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td><b>Kcal</b></td><td class='nutritionValue'>" + data.kcal + "</td></tr>");
+  $(".details table").append("<tr> </tr>");
+  $(".details table").append("<tr><td><b>Protein</b></td></tr>");
+  $(".details table").append("<tr><td>Protein(total)</td><td class='nutritionValue'>" + data.proteinTotal + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td>Protein plant based</td><td class='nutritionValue'>" + data.proteinPlantBased + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td>Protien animal based</td><td class='nutritionValue'>" + data.proteinAnimalBased + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr> </tr>");
+  $(".details table").append("<tr><td><b>Carbs</b></td></tr>");
+  $(".details table").append("<tr><td>Carbs(total)</td><td class='nutritionValue'>" + data.carbsTotal + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td>Carbs sugar</td><td class='nutritionValue'>" + data.carbsSugar + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td>Carbs starchy</td><td class='nutritionValue'>" + data.carbsStarch + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td>Fiber</td><td class='nutritionValue'>" + data.fiber + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr> </tr>");
+  $(".details table").append("<tr><td><b>Fat</b></td></tr>");
+  $(".details table").append("<tr><td>Fat(total)</td><td class='nutritionValue'>" + data.fatTotal + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td>Fat saturated</td><td class='nutritionValue'>" + data.fatSaturated + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td>Fat unsaturated mono</td><td class='nutritionValue'>" + data.fatUnsaturatedMono + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td>Fat unsaturated poly</td><td class='nutritionValue'>" + data.fatUnsaturatedPoly + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td>Fat unsaturated omega 3</td><td class='nutritionValue'>" + data.fatOmega3 + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td>Fat unsaturated omega 6</td><td class='nutritionValue'>" + data.fatOmega6 + "</td><td>" + data.measureUnit + "</td></tr>");
+  $(".details table").append("<tr><td>Transfats</td><td class='nutritionValue'>" + data.transfets + "</td><td>" + data.measureUnit + "</td></tr>");
+}
