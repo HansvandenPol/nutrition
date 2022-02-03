@@ -1,7 +1,20 @@
 .details{
   display: none;
+  width: 20%;
 }
 
 .container {
   display: flex;
+}
+
+.content {
+  width: 20%;
+}
+
+#dailyProducts {
+  width: 20%;
+}
+
+#searchError {
+  display: none;
 }
