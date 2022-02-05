@@ -1,53 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Nice frontend v1</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link href="../css/index.css" rel="stylesheet">
+  <title>Nice frontend v1</title>
 </head>
 <body>
-<div class="container">
-  <div class="content">
-    <h1>Meal calculator 1.3</h1>
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        <span class="fs-4">Meal calculator 1.3</span>
+      </a>
 
-    <p id="searchError"></p>
-    <form id="searchProduct">
-      <input id="productValue" type="text" name="in" placeholder="enter a product.." />
-      <button id="searchProductBtn" type="button">Search</button>
-    </form>
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+      </ul>
+    </header>
   </div>
 
-  <div class="details">
-    <h3 id="productTitle"></h3>
-    <form id="quantityForm">
-      <label for="foodQuantity">Amount (g)</label>
-      <input id="foodQuantity" type="number" value="100" min="1" max="100000">
-    </form>
-    <div id="productDetails"></div>
-    <button id="addToDailyBtn">Add</button>
-    <br>
+  <div class="container pb-3">
+    <div class="row">
+      <div class="col">
+        <div class="bg-light border rounded-3">
+          <div class="content p-3">
+            <p id="searchError"></p>
+            <form id="searchProduct">
+              <input id="productValue" type="text" name="in" placeholder="enter a product.." />
+              <button id="searchProductBtn" type="button">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="bg-light border rounded-3">
+          <div class="details p-3">
+            <h3 id="productTitle"></h3>
+            <form id="quantityForm">
+              <label for="foodQuantity">Amount (g)</label>
+              <input id="foodQuantity" type="number" value="100" min="1" max="100000">
+            </form>
+            <div id="productDetails"></div>
+            <button id="addToDailyBtn">Add</button>
+            <br>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="bg-light border rounded-3">
+          <div id="dailyProducts" class="p-3">
+            <h3 id="productListTitle">Product list</h3>
+            <table id="dailyProductsTable">
+              <thead>
+              <tr>
+                <th>Product</th>
+                <th>Kcal</th>
+                <th>Protein</th>
+                <th>Carbs</th>
+                <th>Fat</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+            <button id="clearBtn">Fasting mode</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <div id="dailyProducts">
-    <h3 id="productListTitle">Product list</h3>
-    <table id="dailyProductsTable">
-      <thead>
-      <tr>
-        <th>Product</th>
-        <th>Kcal</th>
-        <th>Protein</th>
-        <th>Carbs</th>
-        <th>Fat</th>
-      </tr>
-      </thead>
-      <tbody>
-
-      </tbody>
-    </table>
-    <button id="clearBtn">Fasting mode</button>
-  </div>
-</div>
-
+  <script src="../js/bootstrap.js"></script>
   <script src="../js/jquery-3.6.0.js"></script>
   <script src="../js/index.js"></script>
   <script src="../js/dailyProducts.js"></script>
