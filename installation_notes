@@ -1,0 +1,7 @@
+- connect to aws machine through ssh -i [cert] [url]
+- inside the machine, navigate to ~/software/nutrition/nutrition
+- git pull
+- build jar (./mvnw clean install -DskipTests)
+- replace new jar with /var/nutrition/app.jar
+- systemctl restart nutrition
+

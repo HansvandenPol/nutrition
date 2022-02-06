@@ -36,7 +36,7 @@ function showProducts() {
     alert("jeeh");
     return;
   }
-  var validTextRegex = new RegExp('^[A-Za-z]*$');
+  var validTextRegex = new RegExp('^[A-Za-z\\s]*$');
 
   if (!validTextRegex.test(formValue)) {
     alert('heejoh');
