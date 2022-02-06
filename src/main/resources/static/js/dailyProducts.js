@@ -88,9 +88,13 @@ function setLocalStorageProduct(productName, kcalValue, protValue, carbsValue, f
 
 function setDay() {
   var day = new Date().getDay();
-  console.log()
   var dayText;
+  console.log(day);
+
   switch (day) {
+    case 0:
+      dayText  ="sunday";
+      break;
     case 1:
       dayText = "monday";
       break;
@@ -108,9 +112,6 @@ function setDay() {
       break;
     case 6:
       dayText = "saturday";
-      break;
-    case 7:
-      dayText  ="sunday";
       break;
   }
 
