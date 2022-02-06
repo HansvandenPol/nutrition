@@ -36,7 +36,7 @@ function showProducts() {
     alert("jeeh");
     return;
   }
-  var validTextRegex = new RegExp('^[A-Za-z]*$');
+  var validTextRegex = new RegExp('^[A-Za-z\\s]*$');
 
   if (!validTextRegex.test(formValue)) {
     alert('heejoh');
@@ -44,7 +44,7 @@ function showProducts() {
   }
 
   $.ajax({
-    url: 'http://localhost:8080/api/product/search?product=' + formValue,
+    url: '/api/product/search?product=' + formValue,
 
     dataType: 'json',
 
@@ -57,14 +57,13 @@ function showProducts() {
     if($(".content").find("div.results").length > 0) {
       $(".content").find("div.results").empty();
     } else {
-      $(".content").append("<div class='results'></div>").append("<ul id='a'>");
+      $(".content").append("<div class='results'></div>").append("<ul class='list-group' id='a'>");
     }
 
     $.each(data, function (i, item) {
-      // console.log(data);
       var name = data[i].productDescriptionNl;
       var code = data[i].productCode;
-      $(".results").append("<li class='resultItem'>"+ code + " - " + name + "</li>");
+      $(".results").append("<li class='resultItem list-group-item' data-bs-target='#productDetailsModal' data-bs-toggle='modal'>"+ code + " - " + name + "</li>");
     });
 
     $("li.resultItem").click(function (event) {
@@ -74,7 +73,7 @@ function showProducts() {
 
       var id = jQuery(this).text().split("-")[0].trim();
       $.ajax({
-        url: 'http://localhost:8080/api/product/' + id,
+        url: '/api/product/' + id,
 
         dataType: 'json',
 
@@ -175,3 +174,4 @@ function fillDetails(data, quantity) {
   $("#productDetails table").append("<tr><td>Fat unsaturated omega6</td><td class='nutritionValue'>" + baseFatOmega6 + "</td><td>" + data.measureUnit + "</td></tr>");
   $("#productDetails table").append("<tr><td>Transfats</td><td class='nutritionValue'>" + baseFattransfets + "</td><td>" + data.measureUnit + "</td></tr>");
 }
+

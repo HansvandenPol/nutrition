@@ -23,7 +23,7 @@ public class ProductController {
   @Autowired private ProductDaoService productDaoService;
 
   @GetMapping("search")
-  public ResponseEntity<List<Product>> findProducts(@Size(max = 20, min = 2) @Pattern(regexp = "^[A-Za-z]*$") @RequestParam(name = "product") String searchValue) {
+  public ResponseEntity<List<Product>> findProducts(@Size(max = 20, min = 2) @Pattern(regexp = "^[A-Za-z\\s]*$") @RequestParam(name = "product") String searchValue) {
 
     return ResponseEntity.ok(productDaoService.findAllContaining(searchValue));
   }
