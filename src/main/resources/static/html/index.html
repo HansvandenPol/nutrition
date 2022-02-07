@@ -52,6 +52,41 @@
         <h1 class="bd-title" id="productListTitle">Product list</h1>
         <p>Fill in your consumed food of the day to automatically calculate the amount of calories. </p>
           <div id="dailyProducts">
+            <div class="row">
+<!--              <p><b>kcal</b></p>-->
+              <div class="col col-3">
+                <div class="progress">
+                  <div class="progress-bar bg-success" id="kcalProgressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="col col-6">
+               <p id="kcalProgressText"></p>
+              </div>
+            </div>
+
+            <div class="row">
+              <!--              <p><b>kcal</b></p>-->
+              <div class="col col-3">
+                <div class="progress">
+                  <div class="progress-bar bg-success" id="proteinProgressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="col col-6">
+                <p id="proteinProgressText"></p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col col-3">
+                <div class="progress">
+                  <div class="progress-bar bg-success" id="carbsProgressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="col col-6">
+                <p id="carbsProgressText"></p>
+              </div>
+            </div>
+
             <table class="table" id="dailyProductsTable">
               <thead>
               <tr>
@@ -124,5 +159,6 @@
   <script src="../js/jquery-3.6.0.js"></script>
   <script src="../js/index.js"></script>
   <script src="../js/dailyProducts.js"></script>
+  <script src="../js/dailyFoodProgress.js"></script>
 </body>
 </html>

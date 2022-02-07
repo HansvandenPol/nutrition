@@ -27,12 +27,15 @@ $("#addToDailyBtn").click(function () {
   $("#totalProtein").text(totalProtein);
   $("#totalCarbs").text(totalCarbs);
   $("#totalFat").text(totalFat);
+
+  $("#kcalProgressBar").trigger("updateProgress");
 });
 
 $("#clearBtn").click(function (){
   localStorage.clear();
   if($("#dailyProductsTable tbody tr")) {
     $("#dailyProductsTable tbody").empty();
+    $("#kcalProgressBar").trigger("updateProgress");
   };
 });
 
@@ -41,7 +44,7 @@ function calculateTotalOfClass(classNmae) {
   $("."+classNmae).each(function (i, object) {
     total += parseInt($(object).text(), 10);
   });
-  return total;
+  return total.toFixed(1);
 }
 
 function loadProductsFromLocalStorage() {
