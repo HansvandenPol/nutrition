@@ -32,7 +32,7 @@ function updateProgress() {
   $("#kcalProgressBar").attr("aria-valuenow", progressValueKcal);
   $("#kcalProgressBar").css("width", progressValueKcal);
 
-  $("#kcalProgressText").text(currentTotalKcal + "/" + kcalGoal + " kcal");
+  $("#kcalProgressText").text(currentTotalKcal + "/" + kcalGoal + " kcal(g)");
 }
 
 function updateProgressProtein() {
@@ -47,7 +47,7 @@ function updateProgressProtein() {
   $("#proteinProgressBar").attr("aria-valuenow", progressValueProtein);
   $("#proteinProgressBar").css("width", progressValueProtein);
 
-  $("#proteinProgressText").text(currentTotalKcal + "/" + proteinGoal + " protein");
+  $("#proteinProgressText").text(currentTotalKcal + "/" + proteinGoal + " protein(g)");
 }
 
 function updateProgressCarbs() {
@@ -62,5 +62,5 @@ function updateProgressCarbs() {
   $("#carbsProgressBar").attr("aria-valuenow", progressValueCarbs);
   $("#carbsProgressBar").css("width", progressValueCarbs);
 
-  $("#carbsProgressText").text(currentTotalKcal + "/" + carbsGoal).append("<b> carbs</b>");
+  $("#carbsProgressText").text(currentTotalKcal + "/" + carbsGoal).append("<b> carbs(g)</b>");
 }
