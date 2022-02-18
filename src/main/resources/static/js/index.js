@@ -44,7 +44,7 @@ function showProducts() {
   }
 
   $.ajax({
-    url: '/api/product/search?product=' + formValue,
+    url: '/api/public/product/search?product=' + formValue,
 
     dataType: 'json',
 
@@ -73,7 +73,7 @@ function showProducts() {
 
       var id = jQuery(this).text().split("-")[0].trim();
       $.ajax({
-        url: '/api/product/' + id,
+        url: '/api/public/product/' + id,
 
         dataType: 'json',
 
