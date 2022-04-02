@@ -17,6 +17,8 @@ var baseFatOmega6;
 var baseFattransfets;
 var latestData;
 
+var signedIn = false;
+
 $("#productValue").on("keypress", function (e){
  if(e.which == 13){
    e.preventDefault();
@@ -174,4 +176,24 @@ function fillDetails(data, quantity) {
   $("#productDetails table").append("<tr><td>Fat unsaturated omega6</td><td class='nutritionValue'>" + baseFatOmega6 + "</td><td>" + data.measureUnit + "</td></tr>");
   $("#productDetails table").append("<tr><td>Transfats</td><td class='nutritionValue'>" + baseFattransfets + "</td><td>" + data.measureUnit + "</td></tr>");
 }
+
+$('input:radio[name="btnradio"]').change(
+    function() {
+      var optionProductList = $("#optionProductList");
+      var optionAddMeal = $("#optionAddMeal");
+      if ($("#productOption").is(":checked")) {
+        optionProductList.show();
+        optionAddMeal.show();
+        $("#loginRequiredInfo").toggle();
+      } else {
+        optionProductList.hide();
+
+        if(!signedIn) {
+          $("#loginRequiredInfo").toggle();
+        } else {
+          optionAddMeal.show();
+        }
+      }
+    }
+);
 

@@ -6,6 +6,10 @@
   display: none;
 }
 
+#loginRequiredInfo{
+  display: none;
+}
+
 #kcalProgressBar {
 /*width: 25%*/
 }

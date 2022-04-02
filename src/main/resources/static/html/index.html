@@ -38,7 +38,6 @@
         <p>Fill in your consumed food of the day to automatically calculate the amount of calories. </p>
           <div id="dailyProducts">
             <div class="row">
-<!--              <p><b>kcal</b></p>-->
               <div class="col col-4">
                 <div class="progress">
                   <div class="progress-bar bg-success" id="kcalProgressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
@@ -102,11 +101,32 @@
         </div>
         <div class="modal-body">
           <div class="content">
-            <p id="searchError"></p>
-            <form id="searchProduct">
-              <input id="productValue" type="text" name="in" placeholder="enter a product.." />
-              <button class="btn btn-primary" id="searchProductBtn" type="button">Search</button>
-            </form>
+            <div class="row">
+              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="productOption" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="productOption">Products</label>
+
+                <input type="radio" class="btn-check" name="btnradio" id="mealOptions" autocomplete="off">
+                <label class="btn btn-outline-primary" for="mealOptions">Meals</label>
+              </div>
+            </div>
+
+            <div id="optionProductList">
+              <p id="searchError"></p>
+              <form id="searchProduct">
+                <input id="productValue" type="text" name="in" placeholder="enter a product.." />
+                <button class="btn btn-primary" id="searchProductBtn" type="button">Search</button>
+              </form>
+            </div>
+
+            <div id="optionAddMeal">
+
+              <div id="loginRequiredInfo">
+                Please login to use this functionality
+                <a class="btn btn-primary" id="loginRequiredButton" href="/login" type="button">Login</a>
+              </div>
+
+            </div>
           </div>
         </div>
         <div class="modal-footer">
