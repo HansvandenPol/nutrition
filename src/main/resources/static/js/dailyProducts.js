@@ -10,6 +10,10 @@ $("#addToDailyBtn").click(function () {
   var carbsValue = $("#carbsValue").text();
   var fatValue = $("#fatValue").text();
 
+  addProductToList(productName, kcalValue, proteinValue, carbsValue, fatValue);
+});
+
+function addProductToList(productName, kcalValue, proteinValue, carbsValue, fatValue) {
   setLocalStorageProduct(productName, kcalValue, proteinValue, carbsValue, fatValue);
 
   if($("#totalValues").length === 0) {
@@ -29,7 +33,7 @@ $("#addToDailyBtn").click(function () {
   $("#totalFat").text(totalFat);
 
   $("#kcalProgressBar").trigger("updateProgress");
-});
+}
 
 $("#clearBtn").click(function (){
   localStorage.clear();

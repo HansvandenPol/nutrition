@@ -19,6 +19,10 @@ var latestData;
 
 var signedIn = false;
 
+$(document).ready(function () {
+  $("#optionAddMeal").hide();
+});
+
 $("#productValue").on("keypress", function (e){
  if(e.which == 13){
    e.preventDefault();
@@ -29,6 +33,12 @@ $("#productValue").on("keypress", function (e){
 
 $("#searchProductBtn").click(function () {
   showProducts();
+});
+
+$("#searchProductMealBtn").click(function () {
+  var formValue = $("#productValueMeal").val().trim();
+
+  showProductsBySearch(formValue);
 });
 
 
@@ -56,16 +66,17 @@ function showProducts() {
       $('#searchError').show();
     }
 
-    if($(".content").find("div.results").length > 0) {
-      $(".content").find("div.results").empty();
+    console.log(data);
+    if($(".content").find("#optionProductList.results").length > 0) {
+      $(".content").find("#optionProductList.results").empty();
     } else {
-      $(".content").append("<div class='results'></div>").append("<ul class='list-group' id='a'>");
+      $("#optionProductList").append("<div class='results'></div>").append("<ul class='list-group' id='a'>");
     }
 
     $.each(data, function (i, item) {
       var name = data[i].productDescriptionNl;
       var code = data[i].productCode;
-      $(".results").append("<li class='resultItem list-group-item' data-bs-target='#productDetailsModal' data-bs-toggle='modal'>"+ code + " - " + name + "</li>");
+      $("#optionProductList").find(".results").append("<li class='resultItem list-group-item' data-bs-target='#productDetailsModal' data-bs-toggle='modal'>"+ code + " - " + name + "</li>");
     });
 
     $("li.resultItem").click(function (event) {
@@ -182,18 +193,75 @@ $('input:radio[name="btnradio"]').change(
       var optionProductList = $("#optionProductList");
       var optionAddMeal = $("#optionAddMeal");
       if ($("#productOption").is(":checked")) {
+        console.log("A");
         optionProductList.show();
-        optionAddMeal.show();
+        optionAddMeal.hide();
         $("#loginRequiredInfo").toggle();
       } else {
+        console.log("B");
         optionProductList.hide();
 
-        if(!signedIn) {
-          $("#loginRequiredInfo").toggle();
-        } else {
-          optionAddMeal.show();
-        }
+        optionAddMeal.show();
+
+        getMeals();
+
+        // if(!signedIn) {
+        //   $("#loginRequiredInfo").toggle();
+        // } else {
+        // }
       }
     }
 );
+
+/**
+ * Shows the products based on a search result
+ */
+function showProductsBySearch(searchString) {
+  var formValue = searchString
+  if(formValue.length < 2 || formValue.length > 15) {
+    alert("jeeh");
+    return;
+  }
+  var validTextRegex = new RegExp('^[A-Za-z\\s]*$');
+
+  if (!validTextRegex.test(formValue)) {
+    alert('heejoh');
+    return;
+  }
+
+  $.ajax({
+    url: '/api/public/product/search?product=' + formValue,
+
+    dataType: 'json',
+
+  }).done(function (data) {
+    console.log(data);
+    if(data.length === 0 ) {
+      $('#searchErrorMeal').text("No products found");
+      $('#searchErrorMeal').show();
+    }
+
+    $.each(data, function (i, item) {
+      var name = data[i].productDescriptionNl;
+      var code = data[i].productCode;
+      $(".mealProducts").append("<ul class='list-group' id='a'>").append("<li class='resultItem list-group-item' data-bs-target='#mealProductSummary' data-bs-toggle='modal'>"+ code + " - " + name + "</li>");
+    });
+
+    $("li.resultItem").click(function (event) {
+      var id = jQuery(this).text().split("-")[0].trim();
+      var name = jQuery(this).text().substring(jQuery(this).text().indexOf('-')+1).trim();
+      console.log("id: " + id);
+
+      var quantity = $("#mealProductNameQuantity").val();
+      $("#mealProductName").text(name);
+      $('input[id="mealProductId"]').val(id);
+      $('input[id="mealProductQuantity"]').val(quantity);
+    });
+
+    $(".mealProducts").append("</ul>");
+
+  }).fail(function () {
+    console.log("failed");
+  });
+}
 
