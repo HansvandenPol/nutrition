@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class Meal {
 
   @Column(name = "meal_name")
   @Size(min = 1, max = 30)
+  @Pattern(regexp = "[a-zA-Z\\d()]+(\\s+[a-zA-Z\\d()]+){0,30}")
   @NonNull
   private String mealName;
 

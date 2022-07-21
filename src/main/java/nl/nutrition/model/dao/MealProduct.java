@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -23,7 +25,10 @@ public class MealProduct {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @NonNull private double quantity;
+  @NonNull
+  @Min(0)
+  @Max(100000)
+  private double quantity;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "meal_id", nullable = false)
