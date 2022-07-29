@@ -1,6 +1,9 @@
 package nl.nutrition.model.dao;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.UUID;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,6 +28,9 @@ public class MealProduct {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
+  @Column(name = "uid")
+  private String uid = UUID.randomUUID().toString();
+
   @NonNull
   @Min(0)
   @Max(100000)
@@ -32,6 +38,7 @@ public class MealProduct {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "meal_id", nullable = false)
+  @JsonIgnore
   private Meal meal;
 
   @OneToOne(cascade = CascadeType.MERGE)

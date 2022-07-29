@@ -1,6 +1,7 @@
 package nl.nutrition.model.dao;
 
 import java.util.List;
+import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,6 +28,9 @@ public class Meal {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
+  @Column(name = "uid")
+  private String uid = UUID.randomUUID().toString();
+
   @Column(name = "user_id")
   @NonNull
   private int userId;
@@ -36,6 +40,18 @@ public class Meal {
   @Pattern(regexp = "[a-zA-Z\\d()]+(\\s+[a-zA-Z\\d()]+){0,30}")
   @NonNull
   private String mealName;
+
+  @Column(name = "total_kcal")
+  private double totalKcal;
+
+  @Column(name = "total_carbs")
+  private double totalCarbs;
+
+  @Column(name = "total_protein")
+  private double totalProtein;
+
+  @Column(name = "total_fat")
+  private double totalFat;
 
   @OneToMany(mappedBy = "meal", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
   private List<MealProduct> mealProducts;

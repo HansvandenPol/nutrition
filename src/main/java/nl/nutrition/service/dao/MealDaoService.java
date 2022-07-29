@@ -24,4 +24,8 @@ public class MealDaoService {
   public List<Meal> getMeals() {
     return mealRepository.findAll();
   }
+
+  public void updateMeal(Meal addedMeal) {
+    mealRepository.save(addedMeal);
+  }
 }

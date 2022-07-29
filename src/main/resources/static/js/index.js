@@ -193,12 +193,10 @@ $('input:radio[name="btnradio"]').change(
       var optionProductList = $("#optionProductList");
       var optionAddMeal = $("#optionAddMeal");
       if ($("#productOption").is(":checked")) {
-        console.log("A");
         optionProductList.show();
         optionAddMeal.hide();
         $("#loginRequiredInfo").toggle();
       } else {
-        console.log("B");
         optionProductList.hide();
 
         optionAddMeal.show();

@@ -11,9 +11,11 @@ import nl.nutrition.service.MealRepository;
 import nl.nutrition.service.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile("dev")
 public class DatabaseInitialiser implements CommandLineRunner {
 
   public static final String BASE_ITEM_NAME = "item";
@@ -57,16 +59,16 @@ public class DatabaseInitialiser implements CommandLineRunner {
             BASE_ITEM_NAME + "-" + i,
             BASE_ITEM_NAME + "-" + i,
             "g",
+            100.0,
+            1000.0,
+            200.0,
+            1.0,
+            1.0,
+            300.0,
             1.0,
             1.0,
             1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
-            1.0,
+            50.0,
             1.0,
             1.0,
             1.0,

@@ -4,6 +4,7 @@ import java.util.List;
 import javax.validation.Valid;
 import nl.nutrition.exception.MealDaoException;
 import nl.nutrition.model.MealRequest;
+import nl.nutrition.model.dao.Meal;
 import nl.nutrition.service.MealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class MealController {
   @Autowired private MealService mealService;
 
   @GetMapping
-  public ResponseEntity<List<MealRequest>> getMeals() {
+  public ResponseEntity<List<Meal>> getMeals() {
     return ResponseEntity.ok(mealService.getMeals());
   }
 
