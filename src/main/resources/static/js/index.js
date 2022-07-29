@@ -23,6 +23,9 @@ $(document).ready(function () {
   $("#optionAddMeal").hide();
 });
 
+/**
+ * shows the products after pressed on 'enter'
+ */
 $("#productValue").on("keypress", function (e){
  if(e.which == 13){
    e.preventDefault();
@@ -31,17 +34,25 @@ $("#productValue").on("keypress", function (e){
  }
 });
 
+/**
+ * Shows the products after a click on the button
+ */
 $("#searchProductBtn").click(function () {
   showProducts();
 });
 
+/**
+ * Searches for products based on input from the form.
+ */
 $("#searchProductMealBtn").click(function () {
   var formValue = $("#productValueMeal").val().trim();
 
   showProductsBySearch(formValue);
 });
 
-
+/**
+ * Shows the products bases on search filter
+ */
 function showProducts() {
   var formValue = $("#productValue").val().trim();
   if(formValue.length < 2 || formValue.length > 15) {
@@ -66,7 +77,6 @@ function showProducts() {
       $('#searchError').show();
     }
 
-    console.log(data);
     if($(".content").find("#optionProductList.results").length > 0) {
       $(".content").find("#optionProductList.results").empty();
     } else {
@@ -113,16 +123,21 @@ function showProducts() {
     $(".content").append("</ul>");
 
   }).fail(function () {
-    console.log("failed");
+    console.error("failed");
   });
 }
 
+/**
+ * Updates product details upon change event
+ */
 $("#foodQuantity").change(function () {
   var currentFoodQuantity = $("#foodQuantity").val();
-  console.log(currentFoodQuantity);
   updateDetails(currentFoodQuantity);
 });
 
+/**
+ * Changes product details when enter is pressed
+ */
 $("#foodQuantity").on("keypress", function (e) {
   if(e.which == 13){
     e.preventDefault();
@@ -132,17 +147,20 @@ $("#foodQuantity").on("keypress", function (e) {
   }
 });
 
+/**
+ * fills the details with the latest data
+ * @param quantity
+ */
 function updateDetails(quantity) {
-  // $(".nutritionValue").each(function (i, object) {
-  //   var currentValue = $(object).text().split(" ")[0].trim();
-  //   $(object).text(((currentValue/oldFoodQuantity) * quantity).toFixed(1));
-  // });
-
   fillDetails(latestData, quantity);
 }
 
+/**
+ * Fills the product details in the UI
+ * @param data
+ * @param quantity
+ */
 function fillDetails(data, quantity) {
-  console.log(data);
   baseQuantity = (data.quantity / 100 * quantity).toFixed(1);
   baseKcal = (data.kcal / 100 * quantity).toFixed(1);
   baseTotProtein = (data.proteinTotal / 100 * quantity).toFixed(1);;
@@ -188,6 +206,9 @@ function fillDetails(data, quantity) {
   $("#productDetails table").append("<tr><td>Transfats</td><td class='nutritionValue'>" + baseFattransfets + "</td><td>" + data.measureUnit + "</td></tr>");
 }
 
+/**
+ * Toggles between meal and product modal content based on the selected input
+ */
 $('input:radio[name="btnradio"]').change(
     function() {
       var optionProductList = $("#optionProductList");

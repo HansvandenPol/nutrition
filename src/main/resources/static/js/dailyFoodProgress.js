@@ -14,12 +14,14 @@ $(document).ready(function() {
 });
 
 $("#kcalProgressBar").on("updateProgress", function () {
-  console.log("firedd");
   updateProgress();
   updateProgressProtein();
   updateProgressCarbs();
 });
 
+/**
+ * Updates the progressbar to present the ratio KCAL consumed against daily needs.
+ */
 function updateProgress() {
   var currentTotalKcal = parseInt($("#totalKcal").text());
   if(currentTotalKcal >= 0) {
@@ -30,11 +32,14 @@ function updateProgress() {
   }
 
   $("#kcalProgressBar").attr("aria-valuenow", progressValueKcal);
-  $("#kcalProgressBar").css("width", progressValueKcal);
+  $("#kcalProgressBar").css("width", progressValueKcal+'%');
 
   $("#kcalProgressText").text(currentTotalKcal + "/" + kcalGoal + " kcal(g)");
 }
 
+/**
+ * Updates the progressbar to present the ratio of protein consumed against daily needs.
+ */
 function updateProgressProtein() {
   var currentTotalKcal = parseInt($("#totalProtein").text());
   if(currentTotalKcal >= 0) {
@@ -45,11 +50,14 @@ function updateProgressProtein() {
   }
 
   $("#proteinProgressBar").attr("aria-valuenow", progressValueProtein);
-  $("#proteinProgressBar").css("width", progressValueProtein);
+  $("#proteinProgressBar").css("width", progressValueProtein+'%');
 
   $("#proteinProgressText").text(currentTotalKcal + "/" + proteinGoal + " protein(g)");
 }
 
+/**
+ * Updates the progressbar to present the ratio of carbs consumed against daily needs.
+ */
 function updateProgressCarbs() {
   var currentTotalKcal = parseInt($("#totalCarbs").text());
   if(currentTotalKcal >= 0) {
@@ -60,7 +68,7 @@ function updateProgressCarbs() {
   }
 
   $("#carbsProgressBar").attr("aria-valuenow", progressValueCarbs);
-  $("#carbsProgressBar").css("width", progressValueCarbs);
+  $("#carbsProgressBar").css("width", progressValueCarbs+'%');
 
   $("#carbsProgressText").text(currentTotalKcal + "/" + carbsGoal).append("<b> carbs(g)</b>");
 }

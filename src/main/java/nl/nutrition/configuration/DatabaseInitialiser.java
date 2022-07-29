@@ -14,6 +14,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+/** Service to initialize the database */
 @Service
 @Profile("dev")
 public class DatabaseInitialiser implements CommandLineRunner {

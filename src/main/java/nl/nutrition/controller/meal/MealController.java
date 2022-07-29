@@ -14,16 +14,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/** Handles the meal related REST requests */
 @RestController
 @RequestMapping("api/meal")
 public class MealController {
   @Autowired private MealService mealService;
 
+  /**
+   * Retrieves all meals
+   *
+   * @return meals JSON response
+   */
   @GetMapping
   public ResponseEntity<List<Meal>> getMeals() {
     return ResponseEntity.ok(mealService.getMeals());
   }
 
+  /**
+   * Adds a meal in the database
+   *
+   * @param mealRequest the meal to add
+   * @return verification upon success.
+   */
   @PostMapping
   public ResponseEntity<String> addMeal(@Valid @RequestBody MealRequest mealRequest) {
     try {

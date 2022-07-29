@@ -11,7 +11,6 @@ import nl.nutrition.model.dao.MealProduct;
 import nl.nutrition.model.dao.Product;
 import nl.nutrition.service.dao.MealDaoService;
 import nl.nutrition.service.dao.MealProductDaoService;
-import nl.nutrition.service.mapper.MealToMealRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 public class MealService {
   @Autowired private MealDaoService mealDaoService;
   @Autowired private MealProductDaoService mealProductDaoService;
-  @Autowired private MealToMealRequest mealToMealRequest;
 
   public void addMeal(MealRequest mealRequest) throws MealDaoException {
     final Meal addedMeal = mealDaoService.addMeal(mealRequest);

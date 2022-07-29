@@ -1,18 +1,23 @@
 var mealCollection = [];
 var mealData = [];
 
+/**
+ * Adds a product to the new meal
+ */
 $("#addProductToMeal").click(function () {
   var productName = $("#mealProductName").text();
   var productId = $('input[id="mealProductId"]').val();
   var productQuantity = $("#mealProductNameQuantity").val();
 
-  console.log('test data: ' + productName + ' ' + productId);
   $("#selectedMealProducts").append("<p>" + productName + "(" + productQuantity + " g)</p>");
 
   var mealData = {productName: productName, productId: productId, productQuantity: productQuantity};
   mealCollection.push(mealData);
 });
 
+/**
+ * Creates a new meal and calls the backend to store it.
+ */
 $("#createMealBtn").click(function () {
   var validTextRegex = new RegExp('^[A-Za-z1-9\\s]+$');
   var formValue = $("#mealName").val().trim();
@@ -38,13 +43,15 @@ $("#createMealBtn").click(function () {
   });
 
   callAddMeal(payload).then(function () {
-    console.log("done");
     getMeals();
     mealCollection = [];
     clearMealForm();
   });
 });
 
+/**
+ * Retrieves the meals from the backend
+ */
 function getMeals() {
   $("#optionAddMeal").find("#a").empty();
 
@@ -55,10 +62,11 @@ function getMeals() {
   });
 }
 
-
+/**
+ * Makes sure the meals are being displayed in the UI, and creates a 'click' handler for each meal.
+ */
 function showMeals() {
   $.each(mealData, function (i, item) {
-    console.log(mealData[i]);
     var name = mealData[i].mealName;
     var listItem = $("<li class='resultItem list-group-item'>" + name + "</li>");
     listItem.data('id', mealData[i].id);
@@ -67,24 +75,29 @@ function showMeals() {
 
 
   $("li.resultItem").click(function (event){
-    console.log('click');
     var id = jQuery(this).data('id');
-    console.log('MealId: ' + id);
 
     var meal = mealData.find(obj => obj.id === id);
 
-    console.log("found mealdata: " + meal.id);
     addProductToList(meal.mealName, meal.totalKcal, meal.totalProtein, meal.totalCarbs, meal.totalFat);
 
     $('#staticBackdrop').modal('hide');
   });
 }
 
+/**
+ * Clears the form
+ */
 function clearMealForm() {
   $("#mealName").val('');
   $("#selectedMealProducts").empty();
 }
 
+/**
+ * Calls the backend to add a meal
+ * @param payload
+ * @returns {Promise<unknown>}
+ */
 function callAddMeal(payload) {
   return new Promise(function (resolve, reject) {
     $.ajax({
@@ -98,6 +111,10 @@ function callAddMeal(payload) {
   });
 }
 
+/**
+ * Calls the backend to retrieve meals.
+ * @returns {Promise<unknown>}
+ */
 function getMealData() {
   return new Promise(function (resolve, reject) {
     $.ajax({
@@ -107,6 +124,5 @@ function getMealData() {
       resolve(data);
     });
   });
-
 }
 

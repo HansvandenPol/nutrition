@@ -17,5 +17,5 @@ public class MealRequest {
   @NotNull
   private String name;
 
-  @Valid private List<MealProductRequest> mealProductRequests;
+  @Valid @NotNull private List<MealProductRequest> mealProductRequests;
 }
