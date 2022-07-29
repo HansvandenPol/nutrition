@@ -5,7 +5,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import nl.nutrition.model.Product;
+import lombok.extern.slf4j.Slf4j;
+import nl.nutrition.model.dao.Product;
 import nl.nutrition.service.ProductDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/public/product")
 @Validated
+@Slf4j
 public class ProductController {
   @Autowired private ProductDaoService productDaoService;
 
   @GetMapping("search")
-  public ResponseEntity<List<Product>> findProducts(@Size(max = 20, min = 2) @Pattern(regexp = "^[A-Za-z\\s]*$") @RequestParam(name = "product") String searchValue) {
-
+  public ResponseEntity<List<Product>> findProducts(
+      @Size(max = 20, min = 2) @Pattern(regexp = "^[A-Za-z\\s]*$") @RequestParam(name = "product")
+          String searchValue) {
     return ResponseEntity.ok(productDaoService.findAllContaining(searchValue));
   }
 

@@ -3,6 +3,9 @@ $(document).ready(function (){
   setDay();
 });
 
+/**
+ * Adds a product to the list of consumed products
+ */
 $("#addToDailyBtn").click(function () {
   var productName = $("#productTitle").text();
   var kcalValue = $("#kcalValue").text()
@@ -10,6 +13,18 @@ $("#addToDailyBtn").click(function () {
   var carbsValue = $("#carbsValue").text();
   var fatValue = $("#fatValue").text();
 
+  addProductToList(productName, kcalValue, proteinValue, carbsValue, fatValue);
+});
+
+/**
+ * Shows the added product in the UI and adds the product to the localstorage.
+ * @param productName
+ * @param kcalValue
+ * @param proteinValue
+ * @param carbsValue
+ * @param fatValue
+ */
+function addProductToList(productName, kcalValue, proteinValue, carbsValue, fatValue) {
   setLocalStorageProduct(productName, kcalValue, proteinValue, carbsValue, fatValue);
 
   if($("#totalValues").length === 0) {
@@ -29,8 +44,11 @@ $("#addToDailyBtn").click(function () {
   $("#totalFat").text(totalFat);
 
   $("#kcalProgressBar").trigger("updateProgress");
-});
+}
 
+/**
+ * Clears the list of consumed products
+ */
 $("#clearBtn").click(function (){
   localStorage.clear();
   if($("#dailyProductsTable tbody tr")) {
@@ -39,6 +57,11 @@ $("#clearBtn").click(function (){
   };
 });
 
+/**
+ * Calculates the total of the integral text value based on the 'product' class
+ * @param classNmae
+ * @returns {string}
+ */
 function calculateTotalOfClass(classNmae) {
   var total = 0;
   $("."+classNmae).each(function (i, object) {
@@ -47,6 +70,9 @@ function calculateTotalOfClass(classNmae) {
   return total.toFixed(1);
 }
 
+/**
+ * Loads the products from localstorage.
+ */
 function loadProductsFromLocalStorage() {
   for (i = 0; i < window.localStorage.length; i++) {
     key = window.localStorage.key(i);
@@ -56,6 +82,10 @@ function loadProductsFromLocalStorage() {
   }
 }
 
+/**
+ * Loads a product from the localstorage
+ * @param key
+ */
 function loadProduct(key) {
   var product = JSON.parse(localStorage.getItem(key));
   if($("#totalValues").length === 0) {
@@ -75,6 +105,14 @@ function loadProduct(key) {
   $("#totalFat").text(totalFat);
 }
 
+/**
+ * Sets a product in the localstorage.
+ * @param productName
+ * @param kcalValue
+ * @param protValue
+ * @param carbsValue
+ * @param fatValue
+ */
 function setLocalStorageProduct(productName, kcalValue, protValue, carbsValue, fatValue) {
   var uid = ((Math.random() + 1) * 10000).toFixed(0);
   var key = "product-"+productName + "-" + uid;
@@ -89,10 +127,12 @@ function setLocalStorageProduct(productName, kcalValue, protValue, carbsValue, f
   localStorage.setItem(key, JSON.stringify(productData));
 }
 
+/**
+ * Sets the name of the current day in the UI
+ */
 function setDay() {
   var day = new Date().getDay();
   var dayText;
-  console.log(day);
 
   switch (day) {
     case 0:
@@ -120,5 +160,3 @@ function setDay() {
 
   $("#productListTitle").text($("#productListTitle").text() + " - " + dayText);
 }
-
-

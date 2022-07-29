@@ -38,7 +38,6 @@
         <p>Fill in your consumed food of the day to automatically calculate the amount of calories. </p>
           <div id="dailyProducts">
             <div class="row">
-<!--              <p><b>kcal</b></p>-->
               <div class="col col-4">
                 <div class="progress">
                   <div class="progress-bar bg-success" id="kcalProgressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
@@ -102,11 +101,41 @@
         </div>
         <div class="modal-body">
           <div class="content">
-            <p id="searchError"></p>
-            <form id="searchProduct">
-              <input id="productValue" type="text" name="in" placeholder="enter a product.." />
-              <button class="btn btn-primary" id="searchProductBtn" type="button">Search</button>
-            </form>
+            <div class="row">
+              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="productOption" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="productOption">Products</label>
+
+                <input type="radio" class="btn-check" name="btnradio" id="mealOptions" autocomplete="off">
+                <label class="btn btn-outline-primary" for="mealOptions">Meals</label>
+              </div>
+            </div>
+
+            <div id="optionProductList">
+              <p id="searchError"></p>
+              <form id="searchProduct">
+                <input id="productValue" type="text" name="in" placeholder="enter a product.." />
+                <button class="btn btn-primary" id="searchProductBtn" type="button">Search</button>
+              </form>
+            </div>
+
+            <!-- Meal selection and create button -->
+            <div id="optionAddMeal">
+
+<!--              <div id="loginRequiredInfo">-->
+<!--                Please login to use this functionality-->
+<!--                <a class="btn btn-primary" id="loginRequiredButton" href="/login" type="button">Login</a>-->
+<!--              </div>-->
+
+              <div class="row">
+                <div class='results'>
+                  <ul class='list-group' id='a'>
+                  </ul>
+                </div>
+
+                <button class="btn btn-primary" id="" data-bs-target="#addMealModal" data-bs-toggle="modal" type="button">Add Meal</button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -157,10 +186,92 @@
     </div>
   </div>
 
+  <!-- Modal for adding meals -->
+  <div class="modal fade" id="addMealModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addMealModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add a meal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="mealAddForm">
+            <label for="mealName">Meal name</label>
+            <input id="mealName" required type="text" maxlength="50">
+          </form>
+
+          <div id="selectedMealProducts">
+
+          </div>
+          <button type="button" class="btn btn-secondary" data-bs-target="#addMealProduct" data-bs-toggle="modal">Add product</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-target="#staticBackdrop" data-bs-toggle="modal">Back</button>
+          <button type="button" id="createMealBtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="btn btn-primary">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal for adding product in the meals -->
+  <div class="modal fade" id="addMealProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addMealProductLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="searchErrorMeal"></p>
+          <form id="searchProductMeal">
+            <input id="productValueMeal" type="text" name="in" placeholder="enter a product.." />
+            <button class="btn btn-primary" id="searchProductMealBtn" type="button">Search</button>
+          </form>
+
+
+          <div class="mealProducts">
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-target="#addMealModal" data-bs-toggle="modal">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal to show summary selected product  -->
+  <div class="modal fade" id="mealProductSummary" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="mealProductSummaryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Summary product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="mealProductName"></p>
+          <form>
+            <label for="mealProductNameQuantity">Amount (g)</label>
+            <input id="mealProductNameQuantity" type="number" value="100" min="1" max="100000">
+            <input type="hidden" id="mealProductId">
+            <input type="hidden" id="mealProductQuantity">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-target="#addMealProduct" data-bs-toggle="modal">Back</button>
+          <button type="button" id="addProductToMeal" data-bs-target="#addMealModal" data-bs-toggle="modal" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <script src="../js/bootstrap.js"></script>
   <script src="../js/jquery-3.6.0.js"></script>
   <script src="../js/index.js"></script>
   <script src="../js/dailyProducts.js"></script>
   <script src="../js/dailyFoodProgress.js"></script>
+  <script src="../js/createMeal.js  "></script>
 </body>
 </html>

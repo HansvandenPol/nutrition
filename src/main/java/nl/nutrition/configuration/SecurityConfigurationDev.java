@@ -3,6 +3,7 @@ package nl.nutrition.configuration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -13,8 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @Configuration
 @EnableWebSecurity
-@Profile("production")
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+@Profile("dev")
+public class SecurityConfigurationDev extends WebSecurityConfigurerAdapter {
 
   /**
    * Configures what should happen before the request enters the controller, and the response is
@@ -29,19 +30,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
    */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests(a ->
-      a.antMatchers("/html/index.html")
-          .permitAll()
-          .antMatchers("/css/**")
-          .permitAll()
-          .antMatchers("/js/**")
-          .permitAll()
-          .antMatchers("/api/public/**")
-          .permitAll()
-          .antMatchers("/api/meal/**")
-          .hasRole("USER")
-          .antMatchers("/**")
-          .denyAll()
-    ).formLogin();
+    http.csrf().disable().authorizeRequests(a -> a.antMatchers("/**").permitAll());
+  }
+
+  @Override
+  public void configure(WebSecurity webSecurity) {
+    webSecurity.ignoring().antMatchers("/h2/**");
   }
 }
