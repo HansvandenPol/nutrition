@@ -66,23 +66,26 @@ function getMeals() {
  * Makes sure the meals are being displayed in the UI, and creates a 'click' handler for each meal.
  */
 function showMeals() {
-  $.each(mealData, function (i, item) {
-    var name = mealData[i].mealName;
-    var listItem = $("<li class='resultItem list-group-item'>" + name + "</li>");
-    listItem.data('id', mealData[i].id);
-    $("#optionAddMeal").find("#a").append(listItem);
-  });
+  if(mealData.length > 0) {
+    console.log(mealData);
+    $.each(mealData, function (i, item) {
+      var name = mealData[i].mealName;
+      var listItem = $("<li class='resultItem list-group-item'>" + name + "</li>");
+      listItem.data('id', mealData[i].id);
+      $("#optionAddMeal").find("#a").append(listItem);
+    });
 
 
-  $("li.resultItem").click(function (event){
-    var id = jQuery(this).data('id');
+    $("li.resultItem").click(function (event){
+      var id = jQuery(this).data('id');
 
-    var meal = mealData.find(obj => obj.id === id);
+      var meal = mealData.find(obj => obj.id === id);
 
-    addProductToList(meal.mealName, meal.totalKcal, meal.totalProtein, meal.totalCarbs, meal.totalFat);
+      addProductToList(meal.mealName, meal.totalKcal, meal.totalProtein, meal.totalCarbs, meal.totalFat);
 
-    $('#staticBackdrop').modal('hide');
-  });
+      $('#staticBackdrop').modal('hide');
+    });
+  }
 }
 
 /**
@@ -125,4 +128,9 @@ function getMealData() {
     });
   });
 }
+
+$("#addMealProductBtn").click(function () {
+  console.log('clicked');
+  $(".mealProducts").empty();
+});
 

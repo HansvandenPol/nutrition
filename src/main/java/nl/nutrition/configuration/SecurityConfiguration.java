@@ -29,19 +29,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
    */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests(a ->
-      a.antMatchers("/html/index.html")
-          .permitAll()
-          .antMatchers("/css/**")
-          .permitAll()
-          .antMatchers("/js/**")
-          .permitAll()
-          .antMatchers("/api/public/**")
-          .permitAll()
-          .antMatchers("/api/meal/**")
-          .hasRole("USER")
-          .antMatchers("/**")
-          .denyAll()
-    ).formLogin();
+    http.csrf()
+        .disable()
+        .authorizeRequests(
+            a ->
+                a.antMatchers("/html/index.html")
+                    .permitAll()
+                    .antMatchers("/css/**")
+                    .permitAll()
+                    .antMatchers("/js/**")
+                    .permitAll()
+                    .antMatchers("/api/public/**")
+                    .permitAll()
+                    .antMatchers("/api/meal/**")
+                    .permitAll()
+                    .antMatchers("/**")
+                    .denyAll())
+        .formLogin();
   }
 }
