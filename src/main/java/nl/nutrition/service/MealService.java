@@ -53,10 +53,14 @@ public class MealService {
           mealProduct.getProduct().getFatTotal()
               * calculateQuantityFactor(mealProduct.getQuantity(), mealProduct.getProduct());
     }
-    addedMeal.setTotalKcal(totalKcal);
-    addedMeal.setTotalCarbs(totalCarbs);
-    addedMeal.setTotalProtein(totalProtein);
-    addedMeal.setTotalFat(totalFat);
+    addedMeal.setTotalKcal(round(totalKcal));
+    addedMeal.setTotalCarbs(round(totalCarbs));
+    addedMeal.setTotalProtein(round(totalProtein));
+    addedMeal.setTotalFat(round(totalFat));
+  }
+
+  private double round(double value) {
+    return (Math.round(value * 10) / 10.0);
   }
 
   private double calculateQuantityFactor(double quantity, Product product) {

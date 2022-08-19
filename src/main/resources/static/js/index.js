@@ -50,6 +50,23 @@ $("#searchProductMealBtn").click(function () {
   showProductsBySearch(formValue);
 });
 
+$("#openAddProductModalBtn").click(function () {
+  $("#optionProductList").find(".results").empty();
+});
+
+/**
+ * Searches for products based on input from the form when enter is pressed
+ */
+$("#productValueMeal").on("keypress", function (e) {
+  if(e.which == 13){
+    console.log('enter');
+    e.preventDefault();
+    var formValue = $("#productValueMeal").val().trim();
+    showProductsBySearch(formValue);
+  }
+});
+
+
 /**
  * Shows the products bases on search filter
  */
@@ -77,8 +94,8 @@ function showProducts() {
       $('#searchError').show();
     }
 
-    if($(".content").find("#optionProductList.results").length > 0) {
-      $(".content").find("#optionProductList.results").empty();
+    if($("#optionProductList").find(".results").length > 0) {
+      $("#optionProductList").find(".results").empty();
     } else {
       $("#optionProductList").append("<div class='results'></div>").append("<ul class='list-group' id='a'>");
     }
@@ -218,6 +235,8 @@ $('input:radio[name="btnradio"]').change(
         optionAddMeal.hide();
         $("#loginRequiredInfo").toggle();
       } else {
+        $("#selectedMealProducts").empty();
+
         optionProductList.hide();
 
         optionAddMeal.show();
@@ -254,16 +273,21 @@ function showProductsBySearch(searchString) {
     dataType: 'json',
 
   }).done(function (data) {
-    console.log(data);
     if(data.length === 0 ) {
       $('#searchErrorMeal').text("No products found");
       $('#searchErrorMeal').show();
     }
 
+    if($(".mealProducts").find("ul").length > 0) {
+      $(".mealProducts").find("ul").empty();
+    } else {
+      $(".mealProducts").append("<ul class='list-group' id='a'>");
+    }
+
     $.each(data, function (i, item) {
       var name = data[i].productDescriptionNl;
       var code = data[i].productCode;
-      $(".mealProducts").append("<ul class='list-group' id='a'>").append("<li class='resultItem list-group-item' data-bs-target='#mealProductSummary' data-bs-toggle='modal'>"+ code + " - " + name + "</li>");
+      $(".mealProducts").find("ul").append("<li class='resultItem list-group-item' data-bs-target='#mealProductSummary' data-bs-toggle='modal'>"+ code + " - " + name + "</li>");
     });
 
     $("li.resultItem").click(function (event) {
