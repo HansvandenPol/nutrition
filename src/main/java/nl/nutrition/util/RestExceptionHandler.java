@@ -2,6 +2,7 @@ package nl.nutrition.util;
 
 import java.time.LocalDateTime;
 import javax.persistence.EntityNotFoundException;
+import nl.nutrition.exception.CreateAccountException;
 import nl.nutrition.model.ApiError;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,25 +23,37 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
   private static final String GENERAL_ERROR_MSG = "An error has occured!";
 
   @ExceptionHandler(value = EntityNotFoundException.class)
-  public ResponseEntity<ApiError> handleEntityNotFoundException(
-      Exception entityNotFoundException) {
+  public ResponseEntity<ApiError> handleEntityNotFoundException(Exception entityNotFoundException) {
     final int status = HttpStatus.NOT_FOUND.value();
 
-    LOGGER.error(
-        "Caught EnityNotFoundException!", entityNotFoundException);
-    ApiError errorResponse = new ApiError(status, LocalDateTime.now(),"Entity not found","");
+    LOGGER.error("Caught EnityNotFoundException!", entityNotFoundException);
+    ApiError errorResponse = new ApiError(status, LocalDateTime.now(), "Entity not found", "");
+
+    return ResponseEntity.status(status).body(errorResponse);
+  }
+
+  @ExceptionHandler(value = CreateAccountException.class)
+  public ResponseEntity<ApiError> handleCreateAccountException(
+      CreateAccountException handleCreateAccountException) {
+    final int status = HttpStatus.BAD_REQUEST.value();
+
+    LOGGER.error("Caught CreateAccountException!", handleCreateAccountException);
+    ApiError errorResponse =
+        new ApiError(
+            status,
+            LocalDateTime.now(),
+            "Failed to create account",
+            handleCreateAccountException.getMessage());
 
     return ResponseEntity.status(status).body(errorResponse);
   }
 
   @ExceptionHandler(value = Exception.class)
-  public ResponseEntity<ApiError> handleBasicException(
-      Exception exception) {
+  public ResponseEntity<ApiError> handleBasicException(Exception exception) {
     final int status = HttpStatus.INTERNAL_SERVER_ERROR.value();
 
-    LOGGER.error(
-        "Caught exception!", exception);
-    ApiError errorResponse = new ApiError(status, LocalDateTime.now(),GENERAL_ERROR_MSG,"");
+    LOGGER.error("Caught exception!", exception);
+    ApiError errorResponse = new ApiError(status, LocalDateTime.now(), GENERAL_ERROR_MSG, "");
 
     return ResponseEntity.status(status).body(errorResponse);
   }

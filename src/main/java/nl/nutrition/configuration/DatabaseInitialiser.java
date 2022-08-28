@@ -6,12 +6,15 @@ import java.util.stream.IntStream;
 import nl.nutrition.model.dao.Meal;
 import nl.nutrition.model.dao.MealProduct;
 import nl.nutrition.model.dao.Product;
+import nl.nutrition.model.dao.User;
 import nl.nutrition.service.MealProductRepository;
 import nl.nutrition.service.MealRepository;
 import nl.nutrition.service.ProductRepository;
+import nl.nutrition.service.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /** Service to initialize the database */
@@ -23,6 +26,8 @@ public class DatabaseInitialiser implements CommandLineRunner {
   @Autowired private ProductRepository productRepository;
   @Autowired private MealRepository mealRepository;
   @Autowired private MealProductRepository mealProductRepository;
+  @Autowired private UserRepository userRepository;
+  @Autowired private PasswordEncoder passwordEncoder;
 
   private List<Product> productList = new ArrayList<>();
   private List<MealProduct> mealProducts = new ArrayList<>();
@@ -34,6 +39,7 @@ public class DatabaseInitialiser implements CommandLineRunner {
     IntStream.range(0, 5).forEach(this::addMeal);
     IntStream.range(0, 5).forEach(this::addMealProduct);
 
+    userRepository.save(createUser());
     productRepository.saveAll(productList);
     mealRepository.saveAll(meals);
     mealProductRepository.saveAll(mealProducts);
@@ -78,5 +84,9 @@ public class DatabaseInitialiser implements CommandLineRunner {
             1.0,
             1.0);
     productList.add(product);
+  }
+
+  private User createUser() {
+    return new User("hans", passwordEncoder.encode("hans"), false, 0, "ROLE_USER");
   }
 }

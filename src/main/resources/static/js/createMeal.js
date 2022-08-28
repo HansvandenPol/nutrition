@@ -104,7 +104,7 @@ function clearMealForm() {
 function callAddMeal(payload) {
   return new Promise(function (resolve, reject) {
     $.ajax({
-      url: '/api/meal',
+      url: '/api/private/meal',
       type: 'POST',
       contentType: "application/json",
       data: JSON.stringify(payload)
@@ -121,7 +121,7 @@ function callAddMeal(payload) {
 function getMealData() {
   return new Promise(function (resolve, reject) {
     $.ajax({
-      url: '/api/meal',
+      url: '/api/private/meal',
       type: 'GET',
     }).done(function (data) {
       resolve(data);

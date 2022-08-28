@@ -41,8 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .antMatchers("/api/public/**")
                     .permitAll()
-                    .antMatchers("/api/meal/**")
-                    .permitAll()
+                    .antMatchers("/api/private/meal/**")
+                    .hasRole("user")
                     .antMatchers("/**")
                     .denyAll())
         .formLogin();
