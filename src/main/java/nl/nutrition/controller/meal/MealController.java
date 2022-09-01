@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** Handles the meal related REST requests */
 @RestController
-@RequestMapping("api/meal")
+@RequestMapping("api/private/meal")
 public class MealController {
   @Autowired private MealService mealService;
 
