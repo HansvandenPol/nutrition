@@ -4,7 +4,6 @@ import nl.nutrition.service.user.AuthProviderImpl;
 import nl.nutrition.service.user.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -14,9 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * <p>This specific configuration uses the {@link AuthProviderImpl} that uses the database to
  * authenticate users
  */
-@Configuration
 public class AuthenticationProviderConfig {
-
+  @Autowired private AuthProviderImpl authenticationProvider;
   /**
    * Creates an authentication provider Bean
    *
@@ -28,7 +26,6 @@ public class AuthenticationProviderConfig {
   @Autowired
   public AuthenticationProvider getManager(
       PasswordEncoder passwordEncoder, UserDetailServiceImpl userDetailService) {
-    final AuthProviderImpl authenticationProvider = new AuthProviderImpl();
     authenticationProvider.setPasswordEncoder(passwordEncoder);
     authenticationProvider.setUserDetailsService(userDetailService);
     return authenticationProvider;

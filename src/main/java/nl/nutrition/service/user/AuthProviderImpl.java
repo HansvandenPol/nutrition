@@ -8,12 +8,24 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthProviderImpl extends DaoAuthenticationProvider {
+  private final PasswordEncoder passwordEncoder;
+  private final UserRepository userRepository;
 
-  @Autowired private PasswordEncoder passwordEncoder;
-  @Autowired private UserRepository userRepository;
+  @Autowired
+  public AuthProviderImpl(
+      PasswordEncoder passwordEncoder,
+      UserRepository userRepository,
+      UserDetailsService userDetailsService) {
+    this.passwordEncoder = passwordEncoder;
+    this.userRepository = userRepository;
+    this.setUserDetailsService(userDetailsService);
+  }
 
   @Override
   public void additionalAuthenticationChecks(
