@@ -32,5 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 
-spring.log.*
+logs/
 pom.xml.versionsBackup
