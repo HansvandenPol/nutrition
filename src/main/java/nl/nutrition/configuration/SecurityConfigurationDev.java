@@ -43,6 +43,8 @@ public class SecurityConfigurationDev extends WebSecurityConfigurerAdapter {
         .permitAll()
         .antMatchers("/index")
         .permitAll()
+        .antMatchers("/calculator/**")
+        .permitAll()
         .antMatchers("/api/private/**")
         .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
         .antMatchers("/sa/**")
