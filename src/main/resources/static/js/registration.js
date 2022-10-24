@@ -8,6 +8,7 @@ $(document).ready(() => {
 });
 
 $("#registrationForm").submit(async function (e) {
+  console.log("huh");
   e.preventDefault();
   $("#spinnerRegister").show();
   var button = $("#registrationBtn");
