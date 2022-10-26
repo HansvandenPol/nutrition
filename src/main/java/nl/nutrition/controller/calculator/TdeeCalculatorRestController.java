@@ -19,7 +19,7 @@ public class TdeeCalculatorRestController {
   @Autowired private TdeeCalculatorService tdeeCalculatorService;
 
   @PostMapping("tdee")
-  public ResponseEntity<TdeeRestResponse> getBmiValue(
+  public ResponseEntity<TdeeRestResponse> getTdeeValue(
       @RequestBody @Valid TdeeRequestData requestData) {
     final int score = tdeeCalculatorService.calculateTdee(requestData);
     return ResponseEntity.ok(new TdeeRestResponse(score));

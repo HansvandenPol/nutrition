@@ -2,8 +2,16 @@ package nl.nutrition.service.calculator.tdee;
 
 import nl.nutrition.model.calculator.TdeeRequestData;
 
+/**
+ * BMR calculation using Harris Benedict's formula
+ */
 public class HarrisBenedictImpl implements BmrFormula {
 
+  /**
+   * Calculates the BMR
+   * @param requestData
+   * @return the BMR score
+   */
   @Override
   public int calculate(TdeeRequestData requestData) {
     if (requestData.getSex().equals("male")) {
