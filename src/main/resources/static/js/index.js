@@ -21,6 +21,8 @@ var signedIn = false;
 
 $(document).ready(function () {
   $("#optionAddMeal").hide();
+
+  checkResetFoodList();
 });
 
 /**
@@ -306,5 +308,28 @@ function showProductsBySearch(searchString) {
   }).fail(function () {
     console.log("failed");
   });
+}
+
+function checkResetFoodList() {
+  var lastViewed = window.localStorage.getItem("lastViewed");
+  if(!lastViewed) {
+    clearList();
+  } else {
+    var now = new Date();
+    var date = new Date(lastViewed);
+    if(date > now) {
+      clearList();
+    }
+  }
+}
+
+function clearList() {
+  localStorage.clear();
+  var now = new Date();
+  window.localStorage.setItem("lastViewed", now.toDateString());
+  if($("#dailyProductsTable tbody tr")) {
+    $("#dailyProductsTable tbody").empty();
+    $("#kcalProgressBar").trigger("updateProgress");
+  };
 }
 
