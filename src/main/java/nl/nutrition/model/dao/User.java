@@ -27,6 +27,9 @@ public class User {
 
   @NotNull @NonNull private String password;
 
+  @Column(name = "oauth_id", unique = true)
+  private String oauthId;
+
   @Column(name = "is_locked")
   @NotNull
   @NonNull

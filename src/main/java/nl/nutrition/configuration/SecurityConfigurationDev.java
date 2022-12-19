@@ -2,10 +2,12 @@ package nl.nutrition.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 /**
  * Configuration for Spring Security. In this configuration you can determine which endpoints need
@@ -58,14 +60,18 @@ public class SecurityConfigurationDev extends WebSecurityConfigurerAdapter {
         .anyRequest()
         .authenticated()
         .and()
+        .exceptionHandling(e -> e
+            .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
         .formLogin()
         .loginPage("/login")
-        .permitAll()
+        //.permitAll()
         .and()
-        .logout()
-        .invalidateHttpSession(true)
-        .clearAuthentication(true)
-        .permitAll();
+        .oauth2Login();
+//        .and()
+//        .logout()
+//        .invalidateHttpSession(true)
+//        .clearAuthentication(true)
+//        .permitAll();
   }
 
   @Override
